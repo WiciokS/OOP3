@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Data.h"
-#include "Sqlcom.h"
+#include "sqlcom.h"
 #include "mainform.h"
 //#include "registerform.h"
 
@@ -202,7 +202,7 @@ namespace OOP3Task {
 		}
 #pragma endregion
 	private: System::Void btnend_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->Close();
+		Application::Exit();
 	}
 private: System::Void llregister_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
 	this->Hide();

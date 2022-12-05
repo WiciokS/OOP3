@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Data.h"
-#include "Sqlcom.h"
+#include "sqlcom.h"
 #include "loginform.h"
 #include "anonymous.h"
 
@@ -349,26 +349,30 @@ namespace OOP3Task {
 				"Age Error", MessageBoxButtons::OK);
 			return;
 		}
-		try
-		{
-			anonymous reg(name, surname, Username, Password, Admin);
-			reg.registeranon();
-			//auto* use = new User(id, name, surname, Username, Password, Admin);
-			MessageBox::Show("Successfull Register",
-				"Register", MessageBoxButtons::OK);
+		anonymous reg(name, surname, Username, Password, Admin, year, month, day);
+		reg.registeranon();
+		//auto* use = new User(id, name, surname, Username, Password, Admin);
+		MessageBox::Show("Successfull Register",
+			"Register", MessageBoxButtons::OK);
 
-			this->Hide();
-			loginform^ login = gcnew loginform;
-			login->ShowDialog();
+		this->Hide();
+		loginform^ login = gcnew loginform;
+		login->ShowDialog();
+		/*
+		* try
+		{
+			
 		}
 		
 		catch (...) {
 			MessageBox::Show("Failed to connect to database",
 				"Database Connection Error", MessageBoxButtons::OK);
 		}
+		*/
+		
 	}
 private: System::Void btnend_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Close();
+	Application::Exit();
 }
 private: System::Void lllogin_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
 	this->Hide();

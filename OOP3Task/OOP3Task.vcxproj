@@ -116,8 +116,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="addcategory.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="addproduct.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="adminuser.h" />
     <ClInclude Include="anonymous.h" />
+    <ClInclude Include="comments.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Data.h" />
     <ClInclude Include="deleteuserform.h">
       <FileType>CppForm</FileType>
@@ -128,6 +137,9 @@
     <ClInclude Include="mainform.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="onlyview.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="password.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -135,24 +147,46 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="registereduser.h" />
+    <ClInclude Include="registeredviewcontent.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="registerform.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="sqlbase.h" />
+    <ClInclude Include="sqlcategories.h" />
     <ClInclude Include="sqlcom.h" />
+    <ClInclude Include="sqlwish.h" />
+    <ClInclude Include="unregisteredviewcontent.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="wishlist.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="addcategory.cpp" />
+    <ClCompile Include="addproduct.cpp" />
     <ClCompile Include="adminuser.cpp" />
     <ClCompile Include="anonymous.cpp" />
+    <ClCompile Include="comments.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="deleteuserform.cpp" />
     <ClCompile Include="loginform.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainform.cpp" />
+    <ClCompile Include="onlyview.cpp" />
     <ClCompile Include="password.cpp" />
     <ClCompile Include="picturechangeform.cpp" />
     <ClCompile Include="registereduser.cpp" />
+    <ClCompile Include="registeredviewcontent.cpp" />
     <ClCompile Include="registerform.cpp" />
+    <ClCompile Include="sqlbase.cpp" />
+    <ClCompile Include="sqlcategories.cpp" />
     <ClCompile Include="sqlcom.cpp" />
+    <ClCompile Include="sqlwish.cpp" />
+    <ClCompile Include="unregisteredviewcontent.cpp" />
+    <ClCompile Include="wishlist.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -162,6 +196,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="addcategory.resx">
+      <DependentUpon>addcategory.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addproduct.resx">
+      <DependentUpon>addproduct.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="comments.resx">
+      <DependentUpon>comments.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="deleteuserform.resx">
       <DependentUpon>deleteuserform.h</DependentUpon>
     </EmbeddedResource>
@@ -171,14 +214,26 @@
     <EmbeddedResource Include="mainform.resx">
       <DependentUpon>mainform.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="onlyview.resx">
+      <DependentUpon>onlyview.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="password.resx">
       <DependentUpon>password.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="picturechangeform.resx">
       <DependentUpon>picturechangeform.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="registeredviewcontent.resx">
+      <DependentUpon>registeredviewcontent.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="registerform.resx">
       <DependentUpon>registerform.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="unregisteredviewcontent.resx">
+      <DependentUpon>unregisteredviewcontent.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wishlist.resx">
+      <DependentUpon>wishlist.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

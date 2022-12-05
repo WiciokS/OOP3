@@ -10,6 +10,13 @@ void registereduser::changepassword(std::string& curp, std::string& newp)
 	}
 	else throw 404;
 }
+void registereduser::addtowishlist(std::string& userid, std::string& productid, std::string& productname)
+{
+	sqlwishlist add;
+	add.insert(userid, productid, productname);
+	MessageBox::Show("Successfuly added to wishlist",
+		"Wishlist", MessageBoxButtons::OK);
+}
 
 registereduser::registereduser(int& idi, std::string& nam, std::string& surnam, std::string& usernam, std::string& passwor)
 {
@@ -18,6 +25,10 @@ registereduser::registereduser(int& idi, std::string& nam, std::string& surnam, 
 	setsurname(surnam);
 	setusername(usernam);
 	setpassword(passwor);
+}
+registereduser::registereduser()
+{
+
 }
 
 void registereduser::setid(int& idi)

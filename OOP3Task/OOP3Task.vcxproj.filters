@@ -48,6 +48,36 @@
     <ClInclude Include="deleteuserform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="onlyview.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="registeredviewcontent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="comments.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wishlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="addcategory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="addproduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlbase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlcategories.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="unregisteredviewcontent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlwish.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data.cpp">
@@ -84,6 +114,36 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="deleteuserform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="onlyview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="registeredviewcontent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="comments.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wishlist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="addcategory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="addproduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlbase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="unregisteredviewcontent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlcategories.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlwish.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
