@@ -156,6 +156,7 @@
     <ClInclude Include="sqlbase.h" />
     <ClInclude Include="sqlcategories.h" />
     <ClInclude Include="sqlcom.h" />
+    <ClInclude Include="sqlcomments.h" />
     <ClInclude Include="sqlwish.h" />
     <ClInclude Include="unregisteredviewcontent.h">
       <FileType>CppForm</FileType>
@@ -184,6 +185,7 @@
     <ClCompile Include="sqlbase.cpp" />
     <ClCompile Include="sqlcategories.cpp" />
     <ClCompile Include="sqlcom.cpp" />
+    <ClCompile Include="sqlcomments.cpp" />
     <ClCompile Include="sqlwish.cpp" />
     <ClCompile Include="unregisteredviewcontent.cpp" />
     <ClCompile Include="wishlist.cpp" />

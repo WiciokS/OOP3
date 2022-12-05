@@ -1,6 +1,7 @@
 #pragma once
 #include "sqlcom.h"
 #include "sqlwish.h"
+#include "sqlcomments.h"
 
 
 class registereduser
@@ -15,6 +16,8 @@ public:
 
 	void changepassword(std::string& curp, std::string& newp);
 	void addtowishlist(std::string& userid, std::string& productid, std::string& productname);
+	void deletefromwishlist(std::string& idi);
+	void addcomment(std::string& username, std::string& time, std::string& comment, std::string& productid);
 
 	explicit registereduser(int& idi, std::string& nam, std::string& surnam, std::string& usernam, std::string& passwor);
 	explicit registereduser();

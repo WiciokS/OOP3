@@ -1,6 +1,7 @@
 #pragma once
 
 #include "sqlcategories.h"
+#include "comments.h"
 
 namespace OOP3Task {
 
@@ -144,6 +145,7 @@ namespace OOP3Task {
 			this->dataGridView1->RowTemplate->Height = 24;
 			this->dataGridView1->Size = System::Drawing::Size(930, 432);
 			this->dataGridView1->TabIndex = 1;
+			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &unregisteredviewcontent::dataGridView1_CellContentClick);
 			// 
 			// Idunreg
 			// 
@@ -239,5 +241,18 @@ namespace OOP3Task {
 			//listBox1->Items->Add(msclr::interop::marshal_as<String^>(data[i]));
 		}
 	}
-	};
+	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		if (e->RowIndex > -1)		//Ignore clicks of the column headers
+		{
+			if (e->ColumnIndex == 6)
+			{
+				String^ prodid = dataGridView1->Rows[e->RowIndex]->Cells[0]->Value->ToString();
+				String^ nothing = "";
+				std::string idi = msclr::interop::marshal_as<std::string>(prodid);
+				comments^ com = gcnew comments(prodid, nothing);
+				com->ShowDialog();
+			}
+		}
+	}
+};
 }

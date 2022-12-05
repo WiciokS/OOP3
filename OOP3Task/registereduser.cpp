@@ -17,6 +17,20 @@ void registereduser::addtowishlist(std::string& userid, std::string& productid, 
 	MessageBox::Show("Successfuly added to wishlist",
 		"Wishlist", MessageBoxButtons::OK);
 }
+void registereduser::deletefromwishlist(std::string& idi)
+{
+	sqlwishlist wish;
+	wish.deletewish(idi);
+	MessageBox::Show("Successfuly deleted from wishlist",
+		"Wish", MessageBoxButtons::OK);
+}
+void registereduser::addcomment(std::string& username, std::string& time, std::string& comment, std::string& productid)
+{
+	sqlcomment com;
+	com.insert(username, time, comment, productid);
+	MessageBox::Show("Successfuly added comment",
+		"Comments", MessageBoxButtons::OK);
+}
 
 registereduser::registereduser(int& idi, std::string& nam, std::string& surnam, std::string& usernam, std::string& passwor)
 {

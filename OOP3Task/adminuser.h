@@ -1,6 +1,7 @@
 #pragma once
 #include "registereduser.h"
 #include "sqlcategories.h"
+#include "sqlcomments.h"
 
 class adminuser :public registereduser
 {
@@ -13,4 +14,6 @@ public:
 	void deleteuserfromlistbox(std::string& id);
 	void addcategory(std::string& category);
 	void addproduct(std::string& category, std::string& name, std::string& description, std::string& price, std::string& picture);
+	void deleteproduct(std::string& idi);
+	void deletecom(std::string& idi);
 };

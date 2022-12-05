@@ -246,8 +246,8 @@ private: System::Void btnlogin_Click(System::Object^ sender, System::EventArgs^ 
 			"Empty fields Error", MessageBoxButtons::OK);
 		return;
 	}
-	try
-	{
+	//try
+	//{
 		sqlcommands getdata;
 		getdata.getlogininfo(id, name, surname, Username, Password, Admin, isexist);
 		if (isexist)
@@ -261,12 +261,12 @@ private: System::Void btnlogin_Click(System::Object^ sender, System::EventArgs^ 
 			mainform^ ma = gcnew mainform;
 			ma->ShowDialog();
 		}
-	}
+	//}
 	
-	catch (...) {
-		MessageBox::Show("Failed to connect to database",
-			"Database Connection Error", MessageBoxButtons::OK);
-	}
+	//catch (...) {
+	//	MessageBox::Show("Failed to connect to database",
+	//		"Database Connection Error", MessageBoxButtons::OK);
+	//}
 	
 }
 	   private: void resetlogin(void) {

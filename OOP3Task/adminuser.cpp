@@ -31,3 +31,17 @@ void adminuser::addproduct(std::string& category, std::string& name, std::string
 	MessageBox::Show("Admin successfuly added product",
 		"Product", MessageBoxButtons::OK);
 }
+void adminuser::deleteproduct(std::string& idi)
+{
+	sqlcategory add;
+	add.deleteproduct(idi);
+	MessageBox::Show("Admin successfuly deleted product",
+		"Product", MessageBoxButtons::OK);
+}
+void adminuser::deletecom(std::string& idi)
+{
+	sqlcomment com;
+	com.deletecom(idi);
+	MessageBox::Show("Admin successfuly deleted comment",
+		"Comment", MessageBoxButtons::OK);
+}

@@ -78,6 +78,9 @@
     <ClInclude Include="sqlwish.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sqlcomments.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data.cpp">
@@ -144,6 +147,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sqlwish.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlcomments.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

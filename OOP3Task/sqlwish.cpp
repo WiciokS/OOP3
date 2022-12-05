@@ -61,3 +61,15 @@ void sqlwishlist::getprod(std::string& userid, std::string& productid, std::stri
 		productname = msclr::interop::marshal_as<std::string>(reader->GetString(2));
 	}
 }
+void sqlwishlist::deletewish(std::string& idi)
+{
+	String^ command = "DELETE FROM wishlist WHERE Id = '" + msclr::interop::marshal_as<String^>(idi) + "' ";
+	sqlwishlist del;
+	del.deletes(command);
+}
+void sqlwishlist::deletewishbyprod(std::string& idi)
+{
+	String^ command = "DELETE FROM wishlist WHERE productid = '" + msclr::interop::marshal_as<String^>(idi) + "' ";
+	sqlwishlist del;
+	del.deletes(command);
+}

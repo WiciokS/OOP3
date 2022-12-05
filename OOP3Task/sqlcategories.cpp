@@ -79,3 +79,9 @@ void sqlcategory::getproduct(std::vector<std::vector<std::string>>& data)
 		data.push_back(temp);
 	}
 }
+void sqlcategory::deleteproduct(std::string& id)
+{
+	String^ command = "DELETE FROM products WHERE Id = '" + msclr::interop::marshal_as<String^>(id) + "' ";
+	sqlcategory del;
+	del.deletes(command);
+}

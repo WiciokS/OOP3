@@ -2,6 +2,7 @@
 
 #include "registerform.h"
 #include "unregisteredviewcontent.h"
+#include "sqlcom.h"
 
 namespace OOP3Task {
 
@@ -21,6 +22,7 @@ namespace OOP3Task {
 		onlyview(void)
 		{
 			InitializeComponent();
+			resetlogin();
 			//
 			//TODO: Add the constructor code here
 			//
@@ -120,5 +122,9 @@ namespace OOP3Task {
 		unregisteredviewcontent^ con = gcnew unregisteredviewcontent;
 		con->ShowDialog();
 	}
+		   private: void resetlogin(void) {
+			   sqlcommands reset;
+			   reset.resetloginvalue();
+		   }
 };
 }

@@ -2,6 +2,8 @@
 
 #include "sqlwish.h"
 #include "sqlcom.h"
+#include "adminuser.h"
+#include "registereduser.h"
 
 namespace OOP3Task {
 
@@ -169,11 +171,33 @@ namespace OOP3Task {
 		}
 #pragma endregion
 	private: System::Void dataGridViewWish_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		int id;
+		std::string name;
+		std::string surname;
+		std::string username;
+		std::string password;
+		std::string admin;
+		sqlcommands data;
+		data.getuserdata(id, name, surname, username, password, admin);
+
+		if (e->RowIndex > -1)		//Ignore clicks of the column headers
+		{
+			if (e->ColumnIndex == 3)
+			{
+				String^ prodid = dataGridViewWish->Rows[e->RowIndex]->Cells[0]->Value->ToString();
+				std::string idi = msclr::interop::marshal_as<std::string>(prodid);
+				adminuser admi;
+				admi.deletefromwishlist(idi);
+				fillgrid();
+				this->Refresh();
+			}
+		}
 	}
 private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	label1->Text = "WishList";
 }
 private: void fillgrid(void) {
+	dataGridViewWish->Rows->Clear();
 	int id;
 	std::string name;
 	std::string surname;

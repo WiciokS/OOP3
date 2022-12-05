@@ -5,6 +5,7 @@
 #include "sqlwish.h"
 #include "registereduser.h"
 #include "adminuser.h"
+#include "comments.h"
 
 namespace OOP3Task {
 
@@ -64,6 +65,16 @@ namespace OOP3Task {
 	private: System::Windows::Forms::DataGridViewButtonColumn^ Deletervc;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ AddToWishListrvc;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ CommentsLinkrvc;
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -192,6 +203,7 @@ namespace OOP3Task {
 			this->Deletervc->ReadOnly = true;
 			this->Deletervc->Text = L"Delete";
 			this->Deletervc->UseColumnTextForButtonValue = true;
+			this->Deletervc->Visible = false;
 			// 
 			// AddToWishListrvc
 			// 
@@ -241,7 +253,83 @@ namespace OOP3Task {
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 		label1->Text = "Registered Users Content";
 	}
+
+private: System::Void dataGridViewRegistered_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	
+	int id;
+	std::string name;
+	std::string surname;
+	std::string username;
+	std::string password;
+	std::string admin;
+	sqlcommands data;
+	data.getuserdata(id, name, surname, username, password, admin);
+
+	std::vector<std::vector<std::string>> getdata;
+	sqlwishlist get;
+	get.getuserwishprod(getdata, std::to_string(id));
+
+	if (e->RowIndex > -1)		//Ignore clicks of the column headers
+	{
+		if (e->ColumnIndex == 7)
+		{
+			bool same = false;
+			//MessageBox::Show(" Row " + e->RowIndex + ", Column " + e->ColumnIndex + " button clicked");
+			String^ prodid = dataGridViewRegistered->Rows[e->RowIndex]->Cells[0]->Value->ToString();
+			String^ prodname = dataGridViewRegistered->Rows[e->RowIndex]->Cells[2]->Value->ToString();
+			for (int i = 0; i < getdata.size(); i++)
+			{
+				String^ productid = msclr::interop::marshal_as<String^>(getdata[i][2]);
+				if (productid == prodid) same = true;
+			}
+			
+			registereduser in;
+			if(same==false)
+			in.addtowishlist(std::to_string(id), msclr::interop::marshal_as<std::string>(prodid), msclr::interop::marshal_as<std::string>(prodname));
+			else
+				MessageBox::Show("Can't add same product",
+					"Add to wishlist", MessageBoxButtons::OK);
+			//label2->Text = a;
+			//dataGridView1->Rows->Clear();
+		}
+		if (e->ColumnIndex == 6)
+		{
+			String^ prodid = dataGridViewRegistered->Rows[e->RowIndex]->Cells[0]->Value->ToString();
+			std::string idi = msclr::interop::marshal_as<std::string>(prodid);
+			adminuser admi;
+			admi.deleteproduct(idi);
+			sqlwishlist del;
+			del.deletewishbyprod(idi);
+			sqlcomment com;
+			com.deletecombyprod(idi);
+			fillgrid();
+			this->Refresh();
+		}
+		if (e->ColumnIndex == 8)
+		{
+			String^ prodid = dataGridViewRegistered->Rows[e->RowIndex]->Cells[0]->Value->ToString();
+			std::string idi = msclr::interop::marshal_as<std::string>(prodid);
+			comments^ com = gcnew comments(prodid);
+			com->ShowDialog();
+		}
+	}
+}
+private: void isadmin(void) {
+	int id;
+	std::string name;
+	std::string surname;
+	std::string username;
+	std::string password;
+	std::string admin;
+	sqlcommands getdata;
+	getdata.getuserdata(id, name, surname, username, password, admin);
+	if (admin == "1")
+	{
+		dataGridViewRegistered->Columns[6]->Visible = true;
+	}
+}
 private: void fillgrid(void) {
+	dataGridViewRegistered->Rows->Clear();
 	std::vector<std::vector<std::string>> data;
 	sqlcategory get;
 	get.getproduct(data);
@@ -255,45 +343,6 @@ private: void fillgrid(void) {
 		String^ picture = msclr::interop::marshal_as<String^>(data[i][5]);
 		dataGridViewRegistered->Rows->Add(id, categories, name, description, price, Image::FromFile(picture));
 		//listBox1->Items->Add(msclr::interop::marshal_as<String^>(data[i]));
-	}
-}
-private: System::Void dataGridViewRegistered_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-	
-	int id;
-	std::string name;
-	std::string surname;
-	std::string username;
-	std::string password;
-	std::string admin;
-	sqlcommands data;
-	data.getuserdata(id, name, surname, username, password, admin);
-
-	if (e->RowIndex > -1)		//Ignore clicks of the column headers
-	{
-		if (e->ColumnIndex == 7)
-		{
-			//MessageBox::Show(" Row " + e->RowIndex + ", Column " + e->ColumnIndex + " button clicked");
-			String^ prodid = dataGridViewRegistered->Rows[e->RowIndex]->Cells[0]->Value->ToString();
-			String^ prodname = dataGridViewRegistered->Rows[e->RowIndex]->Cells[2]->Value->ToString();
-			registereduser in;
-			in.addtowishlist(std::to_string(id), msclr::interop::marshal_as<std::string>(prodid), msclr::interop::marshal_as<std::string>(prodname));
-			//label2->Text = a;
-			//dataGridView1->Rows->Clear();
-		}
-	}
-}
-private: void isadmin(void) {
-	int id;
-	std::string name;
-	std::string surname;
-	std::string username;
-	std::string password;
-	std::string admin;
-	sqlcommands getdata;
-	getdata.getuserdata(id, name, surname, username, password, admin);
-	if (admin == "0")
-	{
-		dataGridViewRegistered->Columns[6]->Visible = false;
 	}
 }
 };
