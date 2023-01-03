@@ -451,8 +451,9 @@ private: void programlog(void)
 {
 	std::string filetext;
 	std::string filename = "programlog.json";
+	jsonoutput jsn;
 	financieruser fin;
-	fin.programlogout(filetext);
+	jsn.programlogout(filetext);
 	fin.outtofiledata(filename, filetext);
 }
 };

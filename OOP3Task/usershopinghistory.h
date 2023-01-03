@@ -250,8 +250,9 @@ private: void fillgrid(void) {
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		std::string filetext;
 		std::string filename = "shopinghistory.json";
+		jsonoutput jsn;
 		financieruser fin;
-		fin.historyout(filetext);
+		jsn.historyout(filetext);
 		fin.outtofiledata(filename, filetext);
 		MessageBox::Show("Data successfully exported to file",
 			"To file", MessageBoxButtons::OK);

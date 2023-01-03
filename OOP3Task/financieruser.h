@@ -6,7 +6,7 @@
 #include "shopinghistory.h"
 #include "jsonoutput.h"
 
-class financieruser :public registereduser, public jsonoutput
+class financieruser :public registereduser
 {
 private:
 
