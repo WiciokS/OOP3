@@ -7,6 +7,9 @@
 #include "addproduct.h"
 #include "wishlist.h"
 #include "registeredviewcontent.h"
+#include "cart.h"
+#include "sqlsale.h"
+#include "usershopinghistory.h"
 
 namespace OOP3Task {
 
@@ -53,6 +56,8 @@ namespace OOP3Task {
 	private: System::Windows::Forms::Button^ btnwish;
 	private: System::Windows::Forms::Button^ btnaddcategory;
 	private: System::Windows::Forms::Button^ btnaddproduct;
+	private: System::Windows::Forms::Button^ btnCart;
+	private: System::Windows::Forms::Button^ btnShoppinghistory;
 
 
 
@@ -79,6 +84,8 @@ namespace OOP3Task {
 			this->btnwish = (gcnew System::Windows::Forms::Button());
 			this->btnaddcategory = (gcnew System::Windows::Forms::Button());
 			this->btnaddproduct = (gcnew System::Windows::Forms::Button());
+			this->btnCart = (gcnew System::Windows::Forms::Button());
+			this->btnShoppinghistory = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// button1
@@ -109,7 +116,7 @@ namespace OOP3Task {
 				static_cast<System::Byte>(0)));
 			this->label1->Location = System::Drawing::Point(12, 13);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(802, 77);
+			this->label1->Size = System::Drawing::Size(1216, 77);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Main Form";
 			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -164,11 +171,33 @@ namespace OOP3Task {
 			this->btnaddproduct->UseVisualStyleBackColor = true;
 			this->btnaddproduct->Click += gcnew System::EventHandler(this, &mainform::btnaddproduct_Click);
 			// 
+			// btnCart
+			// 
+			this->btnCart->Location = System::Drawing::Point(828, 95);
+			this->btnCart->Name = L"btnCart";
+			this->btnCart->Size = System::Drawing::Size(400, 80);
+			this->btnCart->TabIndex = 5;
+			this->btnCart->Text = L"Cart";
+			this->btnCart->UseVisualStyleBackColor = true;
+			this->btnCart->Click += gcnew System::EventHandler(this, &mainform::btnCart_Click);
+			// 
+			// btnShoppinghistory
+			// 
+			this->btnShoppinghistory->Location = System::Drawing::Point(828, 181);
+			this->btnShoppinghistory->Name = L"btnShoppinghistory";
+			this->btnShoppinghistory->Size = System::Drawing::Size(400, 80);
+			this->btnShoppinghistory->TabIndex = 6;
+			this->btnShoppinghistory->Text = L"Shopping History";
+			this->btnShoppinghistory->UseVisualStyleBackColor = true;
+			this->btnShoppinghistory->Click += gcnew System::EventHandler(this, &mainform::btnShoppinghistory_Click);
+			// 
 			// mainform
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(830, 458);
+			this->ClientSize = System::Drawing::Size(1240, 458);
+			this->Controls->Add(this->btnShoppinghistory);
+			this->Controls->Add(this->btnCart);
 			this->Controls->Add(this->btnaddproduct);
 			this->Controls->Add(this->btnaddcategory);
 			this->Controls->Add(this->btnwish);
@@ -209,9 +238,14 @@ namespace OOP3Task {
 			   std::string username;
 			   std::string password;
 			   std::string admin;
+			   std::string y;
+			   std::string m;
+			   std::string d;
+			   std::string left = "7";
 			   sqlcommands getdata;
 			   getdata.getuserdata(id, name, surname, username, password, admin);
-			   if (admin == "0")
+			   getdata.getuserdate(std::to_string(id), y, m, d);
+			   if (admin == "0"|| admin == "2")
 			   {
 				   button3->Enabled = false;
 				   button3->Visible = false;
@@ -220,6 +254,9 @@ namespace OOP3Task {
 				   btnaddproduct->Enabled = false;
 				   btnaddproduct->Visible = false;
 			   }
+			   sqlsale salecheck;
+			   salecheck.checkuser(std::to_string(id));
+			   salecheck.updatedata(std::to_string(id), m, d, left);
 		   }
 private: System::Void btnaddcategory_Click(System::Object^ sender, System::EventArgs^ e) {
 	addcategory^ cat = gcnew addcategory;
@@ -236,6 +273,14 @@ private: System::Void btnwish_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void btnviewcontent_Click(System::Object^ sender, System::EventArgs^ e) {
 	registeredviewcontent^ reg = gcnew registeredviewcontent;
 	reg->ShowDialog();
+}
+private: System::Void btnCart_Click(System::Object^ sender, System::EventArgs^ e) {
+	cart^ car = gcnew cart;
+	car->ShowDialog();
+}
+private: System::Void btnShoppinghistory_Click(System::Object^ sender, System::EventArgs^ e) {
+	usershopinghistory^ his = gcnew usershopinghistory;
+	his->ShowDialog();
 }
 };
 

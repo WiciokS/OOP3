@@ -6,6 +6,8 @@
 #include "registereduser.h"
 #include "adminuser.h"
 #include "comments.h"
+#include "sqlprogramlog.h"
+#include "financieruser.h"
 
 namespace OOP3Task {
 
@@ -65,6 +67,37 @@ namespace OOP3Task {
 	private: System::Windows::Forms::DataGridViewButtonColumn^ Deletervc;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ AddToWishListrvc;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ CommentsLinkrvc;
+	private: System::Windows::Forms::DataGridViewButtonColumn^ AddToCartruc;
+	private: System::Windows::Forms::Label^ label2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -120,7 +153,9 @@ namespace OOP3Task {
 			this->Deletervc = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
 			this->AddToWishListrvc = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
 			this->CommentsLinkrvc = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->AddToCartruc = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewRegistered))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -131,10 +166,10 @@ namespace OOP3Task {
 			this->dataGridViewRegistered->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->dataGridViewRegistered->AutoSizeRowsMode = System::Windows::Forms::DataGridViewAutoSizeRowsMode::AllCells;
 			this->dataGridViewRegistered->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridViewRegistered->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(9) {
+			this->dataGridViewRegistered->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(10) {
 				this->Idrvc,
 					this->Categoryrvc, this->Namervc, this->Descriptionrvc, this->Pricervc, this->Picturervc, this->Deletervc, this->AddToWishListrvc,
-					this->CommentsLinkrvc
+					this->CommentsLinkrvc, this->AddToCartruc
 			});
 			this->dataGridViewRegistered->Location = System::Drawing::Point(12, 71);
 			this->dataGridViewRegistered->Name = L"dataGridViewRegistered";
@@ -179,7 +214,6 @@ namespace OOP3Task {
 			// 
 			// Pricervc
 			// 
-			dataGridViewCellStyle2->Format = L"C2";
 			dataGridViewCellStyle2->NullValue = nullptr;
 			this->Pricervc->DefaultCellStyle = dataGridViewCellStyle2;
 			this->Pricervc->HeaderText = L"Price";
@@ -224,6 +258,15 @@ namespace OOP3Task {
 			this->CommentsLinkrvc->Text = L"Comments";
 			this->CommentsLinkrvc->UseColumnTextForButtonValue = true;
 			// 
+			// AddToCartruc
+			// 
+			this->AddToCartruc->HeaderText = L"AddToCart";
+			this->AddToCartruc->MinimumWidth = 6;
+			this->AddToCartruc->Name = L"AddToCartruc";
+			this->AddToCartruc->ReadOnly = true;
+			this->AddToCartruc->Text = L"AddToCart";
+			this->AddToCartruc->UseColumnTextForButtonValue = true;
+			// 
 			// label1
 			// 
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -236,17 +279,28 @@ namespace OOP3Task {
 			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			this->label1->Click += gcnew System::EventHandler(this, &registeredviewcontent::label1_Click);
 			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(12, 504);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(44, 16);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"label2";
+			// 
 			// registeredviewcontent
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1243, 509);
+			this->ClientSize = System::Drawing::Size(1243, 526);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->dataGridViewRegistered);
 			this->Name = L"registeredviewcontent";
 			this->Text = L"registeredviewcontent";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewRegistered))->EndInit();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -262,12 +316,19 @@ private: System::Void dataGridViewRegistered_CellContentClick(System::Object^ se
 	std::string username;
 	std::string password;
 	std::string admin;
+	label2->Text = "(" + DateTime::Now + ")";
+	String^ time = label2->Text;
+	std::string timestr = msclr::interop::marshal_as<std::string>(time);
 	sqlcommands data;
 	data.getuserdata(id, name, surname, username, password, admin);
 
 	std::vector<std::vector<std::string>> getdata;
 	sqlwishlist get;
 	get.getuserwishprod(getdata, std::to_string(id));
+
+	std::vector<std::vector<std::string>> getdatacart;
+	sqlcart getcart;
+	getcart.getusercartproduct(getdatacart, std::to_string(id));
 
 	if (e->RowIndex > -1)		//Ignore clicks of the column headers
 	{
@@ -284,8 +345,14 @@ private: System::Void dataGridViewRegistered_CellContentClick(System::Object^ se
 			}
 			
 			registereduser in;
-			if(same==false)
-			in.addtowishlist(std::to_string(id), msclr::interop::marshal_as<std::string>(prodid), msclr::interop::marshal_as<std::string>(prodname));
+			if (same == false)
+			{
+				std::string action = "Add to wishlist";
+				in.addtowishlist(std::to_string(id), msclr::interop::marshal_as<std::string>(prodid), msclr::interop::marshal_as<std::string>(prodname));
+				sqlprogramlog prog;
+				prog.insert(std::to_string(id), msclr::interop::marshal_as<std::string>(prodid), action, timestr);
+				programlog();
+			}
 			else
 				MessageBox::Show("Can't add same product",
 					"Add to wishlist", MessageBoxButtons::OK);
@@ -307,10 +374,45 @@ private: System::Void dataGridViewRegistered_CellContentClick(System::Object^ se
 		}
 		if (e->ColumnIndex == 8)
 		{
+			std::string action = "Open Comments";
 			String^ prodid = dataGridViewRegistered->Rows[e->RowIndex]->Cells[0]->Value->ToString();
 			std::string idi = msclr::interop::marshal_as<std::string>(prodid);
+			sqlprogramlog prog;
+			prog.insert(std::to_string(id), msclr::interop::marshal_as<std::string>(prodid), action, timestr);
+			programlog();
 			comments^ com = gcnew comments(prodid);
 			com->ShowDialog();
+		}
+		if (e->ColumnIndex == 9)
+		{
+			std::string action = "Add to Cart";
+			bool same = false;
+			//MessageBox::Show(" Row " + e->RowIndex + ", Column " + e->ColumnIndex + " button clicked");
+			String^ prodid = dataGridViewRegistered->Rows[e->RowIndex]->Cells[0]->Value->ToString();
+			String^ prodname = dataGridViewRegistered->Rows[e->RowIndex]->Cells[2]->Value->ToString();
+			String^ prodprice = dataGridViewRegistered->Rows[e->RowIndex]->Cells[4]->Value->ToString();
+			for (int i = 0; i < getdatacart.size(); i++)
+			{
+				String^ productid = msclr::interop::marshal_as<String^>(getdatacart[i][2]);
+				if (productid == prodid) same = true;
+			}
+			
+
+			registereduser in;
+			if (same == false)
+			{
+				in.addtocart(std::to_string(id), msclr::interop::marshal_as<std::string>(prodid),
+					msclr::interop::marshal_as<std::string>(prodname), msclr::interop::marshal_as<std::string>(prodprice));
+				sqlprogramlog prog;
+				prog.insert(std::to_string(id), msclr::interop::marshal_as<std::string>(prodid), action, timestr);
+				programlog();
+			}
+				
+			else
+				MessageBox::Show("Can't add same product",
+					"Add to cart", MessageBoxButtons::OK);
+			//label2->Text = a;
+			//dataGridView1->Rows->Clear();
 		}
 	}
 }
@@ -344,6 +446,14 @@ private: void fillgrid(void) {
 		dataGridViewRegistered->Rows->Add(id, categories, name, description, price, Image::FromFile(picture));
 		//listBox1->Items->Add(msclr::interop::marshal_as<String^>(data[i]));
 	}
+}
+private: void programlog(void)
+{
+	std::string filetext;
+	std::string filename = "programlog.json";
+	financieruser fin;
+	fin.programlogout(filetext);
+	fin.outtofiledata(filename, filetext);
 }
 };
 }

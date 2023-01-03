@@ -167,3 +167,22 @@ void sqlcommands::getallusersdata(std::vector<std::vector<std::string>>& data)
 	//		"Database Connection Error", MessageBoxButtons::OK);
 	//}
 }
+void sqlcommands::getuserdate(std::string& id, std::string& y, std::string& m, std::string& d)
+{
+	String^ connString;
+	connectadress(connString);
+	SqlConnection sqlConn(connString);
+	String^ sqlQuery = "SELECT year,month,day FROM userdata WHERE Id=@id;";
+	SqlCommand command(sqlQuery, % sqlConn);
+	command.Parameters->AddWithValue("@id", msclr::interop::marshal_as<String^>(id));
+
+	sqlConn.Open();
+	SqlDataReader^ reader = command.ExecuteReader();
+
+	if (reader->Read())
+	{
+		y = msclr::interop::marshal_as<std::string>(reader->GetString(0));
+		m = msclr::interop::marshal_as<std::string>(reader->GetString(1));
+		d = msclr::interop::marshal_as<std::string>(reader->GetString(2));
+	}
+}

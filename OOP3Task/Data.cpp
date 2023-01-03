@@ -13,7 +13,7 @@ bool Datas::Age(int y, int m, int d)
     if (age >= 14) return true;
     else return false;
 }
-int Datas::DaysUntil(int m, int d)
+bool Datas::DaysUntil(int m, int d, int left)
 {
     time_t now = time(nullptr);
     tm* ltm = localtime(&now);
@@ -80,7 +80,22 @@ int Datas::DaysUntil(int m, int d)
             count -= (ltm->tm_mday - d);
     }
     // output
-    return count;
+    
+    if (count > left)
+    {
+        if ((1900 + ltm->tm_year) % 4 == 0)
+        {
+            count = 366 - count;
+        }
+        else
+        {
+            count = 365 - count;
+        }
+    }
+    if (count <= left) return true;
+    else return false;
+    
+    //return count;
 }
 bool Datas::IsMore(int y, int m, int d)
 {

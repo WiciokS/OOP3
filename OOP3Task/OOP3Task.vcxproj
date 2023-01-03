@@ -124,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="adminuser.h" />
     <ClInclude Include="anonymous.h" />
+    <ClInclude Include="cart.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="comments.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -131,6 +134,8 @@
     <ClInclude Include="deleteuserform.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="financieruser.h" />
+    <ClInclude Include="jsonoutput.h" />
     <ClInclude Include="loginform.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -153,12 +158,19 @@
     <ClInclude Include="registerform.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="shopinghistory.h" />
     <ClInclude Include="sqlbase.h" />
+    <ClInclude Include="sqlcart.h" />
     <ClInclude Include="sqlcategories.h" />
     <ClInclude Include="sqlcom.h" />
     <ClInclude Include="sqlcomments.h" />
+    <ClInclude Include="sqlprogramlog.h" />
+    <ClInclude Include="sqlsale.h" />
     <ClInclude Include="sqlwish.h" />
     <ClInclude Include="unregisteredviewcontent.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="usershopinghistory.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="wishlist.h">
@@ -170,9 +182,12 @@
     <ClCompile Include="addproduct.cpp" />
     <ClCompile Include="adminuser.cpp" />
     <ClCompile Include="anonymous.cpp" />
+    <ClCompile Include="cart.cpp" />
     <ClCompile Include="comments.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="deleteuserform.cpp" />
+    <ClCompile Include="financieruser.cpp" />
+    <ClCompile Include="jsonoutput.cpp" />
     <ClCompile Include="loginform.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainform.cpp" />
@@ -182,12 +197,17 @@
     <ClCompile Include="registereduser.cpp" />
     <ClCompile Include="registeredviewcontent.cpp" />
     <ClCompile Include="registerform.cpp" />
+    <ClCompile Include="shopinghistory.cpp" />
     <ClCompile Include="sqlbase.cpp" />
+    <ClCompile Include="sqlcart.cpp" />
     <ClCompile Include="sqlcategories.cpp" />
     <ClCompile Include="sqlcom.cpp" />
     <ClCompile Include="sqlcomments.cpp" />
+    <ClCompile Include="sqlprogramlog.cpp" />
+    <ClCompile Include="sqlsale.cpp" />
     <ClCompile Include="sqlwish.cpp" />
     <ClCompile Include="unregisteredviewcontent.cpp" />
+    <ClCompile Include="usershopinghistory.cpp" />
     <ClCompile Include="wishlist.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="addproduct.resx">
       <DependentUpon>addproduct.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cart.resx">
+      <DependentUpon>cart.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="comments.resx">
       <DependentUpon>comments.h</DependentUpon>
@@ -234,11 +257,23 @@
     <EmbeddedResource Include="unregisteredviewcontent.resx">
       <DependentUpon>unregisteredviewcontent.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="usershopinghistory.resx">
+      <DependentUpon>usershopinghistory.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="wishlist.resx">
       <DependentUpon>wishlist.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="programlog.json" />
+    <None Include="shopinghistory.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

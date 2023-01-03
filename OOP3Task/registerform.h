@@ -25,6 +25,7 @@ namespace OOP3Task {
 		{
 			
 			InitializeComponent();
+			fillbox();
 			//
 			//TODO: Add the constructor code here
 			//
@@ -61,6 +62,11 @@ namespace OOP3Task {
 	private: System::Windows::Forms::LinkLabel^ lllogin;
 
 	private: System::Windows::Forms::Button^ btnend;
+	private: System::Windows::Forms::ListBox^ listBox1;
+	private: System::Windows::Forms::Label^ lb7;
+
+
+
 
 
 	protected:
@@ -96,6 +102,8 @@ namespace OOP3Task {
 			this->cbadmin = (gcnew System::Windows::Forms::CheckBox());
 			this->lllogin = (gcnew System::Windows::Forms::LinkLabel());
 			this->btnend = (gcnew System::Windows::Forms::Button());
+			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
+			this->lb7 = (gcnew System::Windows::Forms::Label());
 			this->tableLayoutPanel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -251,6 +259,7 @@ namespace OOP3Task {
 			this->cbadmin->TabIndex = 5;
 			this->cbadmin->Text = L"Admin";
 			this->cbadmin->UseVisualStyleBackColor = true;
+			this->cbadmin->Visible = false;
 			// 
 			// lllogin
 			// 
@@ -274,11 +283,33 @@ namespace OOP3Task {
 			this->btnend->UseVisualStyleBackColor = true;
 			this->btnend->Click += gcnew System::EventHandler(this, &registerform::btnend_Click);
 			// 
+			// listBox1
+			// 
+			this->listBox1->FormattingEnabled = true;
+			this->listBox1->ItemHeight = 25;
+			this->listBox1->Location = System::Drawing::Point(419, 283);
+			this->listBox1->Name = L"listBox1";
+			this->listBox1->Size = System::Drawing::Size(120, 104);
+			this->listBox1->TabIndex = 7;
+			this->listBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &registerform::listBox1_SelectedIndexChanged);
+			// 
+			// lb7
+			// 
+			this->lb7->AutoSize = true;
+			this->lb7->Location = System::Drawing::Point(546, 283);
+			this->lb7->Name = L"lb7";
+			this->lb7->Size = System::Drawing::Size(64, 25);
+			this->lb7->TabIndex = 8;
+			this->lb7->Text = L"label7";
+			this->lb7->Visible = false;
+			// 
 			// registerform
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(853, 396);
+			this->Controls->Add(this->lb7);
+			this->Controls->Add(this->listBox1);
 			this->Controls->Add(this->lllogin);
 			this->Controls->Add(this->cbadmin);
 			this->Controls->Add(this->label6);
@@ -320,8 +351,12 @@ namespace OOP3Task {
 		std::string month = msclr::interop::marshal_as<std::string>(this->tbmonth->Text);
 		std::string day = msclr::interop::marshal_as<std::string>(this->tbday->Text);
 
-		if (cbadmin->Checked)
+		if (lb7->Text == "admin")
 			Admin = "1";
+		else if (lb7->Text == "financier")
+			Admin = "2";
+		else if (lb7->Text == "user")
+			Admin = "0";
 		else
 			Admin = "0";
 		if (this->tbname->Text->Length == 0 || this->tbsurname->Text->Length == 0
@@ -415,6 +450,15 @@ private: System::Void tbpassword_KeyPress(System::Object^ sender, System::Window
 	tbpassword->MaxLength = 12;
 	if (!Char::IsLetter(e->KeyChar) && e->KeyChar != 0x08 && !Char::IsDigit(e->KeyChar))
 		e->Handled = true;
+}
+private: void fillbox(void) {
+	listBox1->Items->Clear();
+	listBox1->Items->Add("user");
+	listBox1->Items->Add("admin");
+	listBox1->Items->Add("financier");
+}
+private: System::Void listBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	lb7->Text = listBox1->SelectedItem->ToString();
 }
 };
 }

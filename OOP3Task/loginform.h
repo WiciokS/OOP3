@@ -27,6 +27,7 @@ namespace OOP3Task {
 			
 			InitializeComponent();
 			resetlogin();
+			fillbox();
 			//
 			//TODO: Add the constructor code here
 			//
@@ -37,6 +38,7 @@ namespace OOP3Task {
 			otherform = o;
 			InitializeComponent();
 			resetlogin();
+			fillbox();
 			//
 			//TODO: Add the constructor code here
 			//
@@ -63,6 +65,8 @@ namespace OOP3Task {
 	private: System::Windows::Forms::Button^ btnlogin;
 	private: System::Windows::Forms::LinkLabel^ llregister;
 	private: System::Windows::Forms::Button^ btnend;
+	private: System::Windows::Forms::ListBox^ listBox1;
+	private: System::Windows::Forms::Label^ lb4;
 
 	private:
 		/// <summary>
@@ -86,6 +90,8 @@ namespace OOP3Task {
 			this->btnlogin = (gcnew System::Windows::Forms::Button());
 			this->llregister = (gcnew System::Windows::Forms::LinkLabel());
 			this->btnend = (gcnew System::Windows::Forms::Button());
+			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
+			this->lb4 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -143,6 +149,7 @@ namespace OOP3Task {
 			this->cbadmin->TabIndex = 3;
 			this->cbadmin->Text = L"Admin";
 			this->cbadmin->UseVisualStyleBackColor = true;
+			this->cbadmin->Visible = false;
 			// 
 			// btnlogin
 			// 
@@ -175,11 +182,33 @@ namespace OOP3Task {
 			this->btnend->UseVisualStyleBackColor = true;
 			this->btnend->Click += gcnew System::EventHandler(this, &loginform::btnend_Click);
 			// 
+			// listBox1
+			// 
+			this->listBox1->FormattingEnabled = true;
+			this->listBox1->ItemHeight = 25;
+			this->listBox1->Location = System::Drawing::Point(432, 200);
+			this->listBox1->Name = L"listBox1";
+			this->listBox1->Size = System::Drawing::Size(120, 104);
+			this->listBox1->TabIndex = 7;
+			this->listBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &loginform::listBox1_SelectedIndexChanged);
+			// 
+			// lb4
+			// 
+			this->lb4->AutoSize = true;
+			this->lb4->Location = System::Drawing::Point(559, 212);
+			this->lb4->Name = L"lb4";
+			this->lb4->Size = System::Drawing::Size(38, 25);
+			this->lb4->TabIndex = 8;
+			this->lb4->Text = L"lb4";
+			this->lb4->Visible = false;
+			// 
 			// loginform
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(853, 396);
+			this->Controls->Add(this->lb4);
+			this->Controls->Add(this->listBox1);
 			this->Controls->Add(this->btnend);
 			this->Controls->Add(this->llregister);
 			this->Controls->Add(this->btnlogin);
@@ -229,15 +258,14 @@ private: System::Void btnlogin_Click(System::Object^ sender, System::EventArgs^ 
 	std::string Admin;
 	bool isexist = false;
 
-	if (cbadmin->Checked)
-	{
+	if (lb4->Text == "admin")
 		Admin = "1";
-	}
-
-	else
-	{
+	else if (lb4->Text == "financier")
+		Admin = "2";
+	else if (lb4->Text == "user")
 		Admin = "0";
-	}
+	else
+		Admin = "0";
 
 
 	if (this->tbusername->Text->Length == 0 || this->tbpassword->Text->Length == 0)
@@ -273,5 +301,14 @@ private: System::Void btnlogin_Click(System::Object^ sender, System::EventArgs^ 
 		   sqlcommands reset;
 		   reset.resetloginvalue();
 	   }
+private: void fillbox(void) {
+	listBox1->Items->Clear();
+	listBox1->Items->Add("user");
+	listBox1->Items->Add("admin");
+	listBox1->Items->Add("financier");
+}
+private: System::Void listBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	lb4->Text = listBox1->SelectedItem->ToString();
+}
 };
 }

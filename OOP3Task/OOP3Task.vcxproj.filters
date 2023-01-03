@@ -81,6 +81,30 @@
     <ClInclude Include="sqlcomments.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sqlcart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlsale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shopinghistory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="usershopinghistory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="financieruser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="jsonoutput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlprogramlog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data.cpp">
@@ -152,5 +176,33 @@
     <ClCompile Include="sqlcomments.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sqlcart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlsale.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shopinghistory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="usershopinghistory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="financieruser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="jsonoutput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlprogramlog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shopinghistory.json" />
+    <None Include="programlog.json" />
   </ItemGroup>
 </Project>

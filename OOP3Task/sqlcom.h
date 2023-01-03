@@ -14,5 +14,6 @@ public:
 	void updatepassword(std::string& id, std::string& password);
 	void deleteuser(std::string& id);
 	void getallusersdata(std::vector<std::vector<std::string>>& data);
+	void getuserdate(std::string& id,std::string& y, std::string& m, std::string& d);
 
 };

@@ -2,6 +2,8 @@
 #include "sqlcom.h"
 #include "sqlwish.h"
 #include "sqlcomments.h"
+#include "sqlcart.h"
+#include "shopinghistory.h"
 
 
 class registereduser
@@ -16,8 +18,12 @@ public:
 
 	void changepassword(std::string& curp, std::string& newp);
 	void addtowishlist(std::string& userid, std::string& productid, std::string& productname);
+	void addtocart(std::string& userid, std::string& productid, std::string& productname, std::string& price);
 	void deletefromwishlist(std::string& idi);
+	void deletefromcart(std::string& idi);
 	void addcomment(std::string& username, std::string& time, std::string& comment, std::string& productid);
+	void buy(std::string& userid, std::string& productid, std::string& productname, std::string& price, std::string& time);
+	void seehistory(std::vector<std::vector<std::string>>& data, std::string& userid);
 
 	explicit registereduser(int& idi, std::string& nam, std::string& surnam, std::string& usernam, std::string& passwor);
 	explicit registereduser();
